@@ -1,11 +1,8 @@
 import 'package:app_architecture_example/app_architecture_example.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:result_dart/result_dart.dart';
-
-class MockClient extends Mock implements Client {}
 
 class MockParallelumCarCatalogService extends Mock
     implements ParallelumCarCatalogService {}
@@ -38,11 +35,11 @@ void main() {
           .thenAnswer((_) async => Success(mockCarBrands));
 
       // Act
-      final result = await sut.fetchCarBrands();
+      final newState = await sut.fetchCarBrands();
 
       // Assert
-      expect(result, isA<CarBrandsSuccess>());
-      final successState = result as CarBrandsSuccess;
+      expect(newState, isA<CarBrandsSuccess>());
+      final successState = newState as CarBrandsSuccess;
       expect(successState.carBrands, mockCarBrands);
       verify(() => mockService.fetchCarBrands()).called(1);
     });
@@ -55,11 +52,11 @@ void main() {
           .thenAnswer((_) async => Failure(mockException));
 
       // Act
-      final result = await sut.fetchCarBrands();
+      final newState = await sut.fetchCarBrands();
 
       // Assert
-      expect(result, isA<CarCatalogFailure>());
-      final failureState = result as CarCatalogFailure;
+      expect(newState, isA<CarCatalogFailure>());
+      final failureState = newState as CarCatalogFailure;
       expect(
         failureState.message,
         'Failed to fetch car brands catalog: $mockException',
@@ -84,11 +81,11 @@ void main() {
           .thenAnswer((_) async => Success(mockCarModels));
 
       // Act
-      final result = await sut.fetchCarModelsByBrand(brandId);
+      final newState = await sut.fetchCarModelsByBrand(brandId);
 
       // Assert
-      expect(result, isA<CarModelsByBrandSuccess>());
-      final successState = result as CarModelsByBrandSuccess;
+      expect(newState, isA<CarModelsByBrandSuccess>());
+      final successState = newState as CarModelsByBrandSuccess;
       expect(successState.carModels, mockCarModels);
       verify(() => mockService.fetchCarModelsByBrand(brandId)).called(1);
     });
@@ -103,11 +100,11 @@ void main() {
           .thenAnswer((_) async => Failure(mockException));
 
       // Act
-      final result = await sut.fetchCarModelsByBrand(brandId);
+      final newState = await sut.fetchCarModelsByBrand(brandId);
 
       // Assert
-      expect(result, isA<CarCatalogFailure>());
-      final failureState = result as CarCatalogFailure;
+      expect(newState, isA<CarCatalogFailure>());
+      final failureState = newState as CarCatalogFailure;
       expect(
         failureState.message,
         'Failed to fetch car models catalog: $mockException',

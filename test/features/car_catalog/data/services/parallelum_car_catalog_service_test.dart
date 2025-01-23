@@ -11,13 +11,13 @@ class MockClient extends Mock implements Client {}
 void main() {
   group('ParallelumCarCatalogService Tests |', () {
     late MockClient mockClient;
-    late ParallelumCarCatalogService service;
     late String baseUrl;
+    late ParallelumCarCatalogService sut;
 
     setUp(() {
       mockClient = MockClient();
       baseUrl = faker.internet.httpsUrl();
-      service = ParallelumCarCatalogService(mockClient, baseUrl: baseUrl);
+      sut = ParallelumCarCatalogService(mockClient, baseUrl: baseUrl);
     });
 
     setUpAll(() {
@@ -41,7 +41,7 @@ void main() {
           .thenAnswer((_) async => Response(mockResponseData, 200));
 
       // Act
-      final result = await service.fetchCarBrands();
+      final result = await sut.fetchCarBrands();
 
       // Assert
       expect(result.isSuccess(), isTrue);
@@ -65,17 +65,17 @@ void main() {
           .thenAnswer((_) async => Response('', mockStatusCode));
 
       // Act
-      final result = await service.fetchCarBrands();
+      final result = await sut.fetchCarBrands();
 
       // Assert
       expect(result.isError(), isTrue);
       result
           .onSuccess(
-        (_) => fail('Expected failure but got success'),
-      )
-          .onFailure((error) {
-        expect(error, isA<Exception>());
-      });
+            (_) => fail('Expected failure but got success'),
+          )
+          .onFailure(
+            (error) => expect(error, isA<Exception>()),
+          );
       verify(() => mockClient.get(any())).called(1);
     });
 
@@ -97,7 +97,7 @@ void main() {
       ).thenAnswer((_) async => Response(mockResponseData, 200));
 
       // Act
-      final result = await service.fetchCarModelsByBrand(brandId);
+      final result = await sut.fetchCarModelsByBrand(brandId);
 
       // Assert
       expect(result.isSuccess(), isTrue);
@@ -123,19 +123,13 @@ void main() {
       ).thenAnswer((_) async => Response('', mockStatusCode));
 
       // Act
-      final result = await service.fetchCarModelsByBrand(brandId);
+      final result = await sut.fetchCarModelsByBrand(brandId);
 
       // Assert
       expect(result.isError(), isTrue);
       result
-          .onSuccess(
-        (_) => fail('Expected failure but got success'),
-      )
-          .onFailure(
-        (error) {
-          expect(error, isA<Exception>());
-        },
-      );
+          .onSuccess((_) => fail('Expected failure but got success'))
+          .onFailure((error) => expect(error, isA<Exception>()));
       verify(
         () => mockClient.get(Uri.parse('$baseUrl/cars/brands/$brandId/models')),
       ).called(1);

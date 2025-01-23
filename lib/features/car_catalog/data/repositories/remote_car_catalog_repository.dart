@@ -7,8 +7,8 @@ class RemoteCarCatalogRepository implements CarCatalogRepository {
 
   @override
   Future<CarCatalogViewState> fetchCarBrands() async {
-    final carBrandsResult = await _service.fetchCarBrands();
-    return carBrandsResult.fold(
+    final result = await _service.fetchCarBrands();
+    return result.fold(
       CarBrandsSuccess.new,
       (error) => CarCatalogFailure(
         'Failed to fetch car brands catalog: $error',
@@ -18,9 +18,8 @@ class RemoteCarCatalogRepository implements CarCatalogRepository {
 
   @override
   Future<CarCatalogViewState> fetchCarModelsByBrand(int brandId) async {
-    final carModels = await _service.fetchCarModelsByBrand(brandId);
-
-    return carModels.fold(
+    final result = await _service.fetchCarModelsByBrand(brandId);
+    return result.fold(
       CarModelsByBrandSuccess.new,
       (error) => CarCatalogFailure(
         'Failed to fetch car models catalog: $error',

@@ -32,11 +32,7 @@ class ParallelumCarCatalogService {
         );
       }
     } catch (error) {
-      return Failure(
-        Exception(
-          'Failed to fetch car brands catalog: $error',
-        ),
-      );
+      return Failure(Exception(error));
     }
   }
 
@@ -62,11 +58,7 @@ class ParallelumCarCatalogService {
         );
       }
     } catch (error) {
-      return Failure(
-        Exception(
-          'Failed to fetch car models catalog: $error',
-        ),
-      );
+      return Failure(Exception(error));
     }
   }
 }
