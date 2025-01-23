@@ -1,0 +1,26 @@
+name: minicore_arch_example
+description: "A MiniCore Architecture Example"
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.1.0
+
+dev_dependencies:
+  faker: ^2.2.0
+  flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
+  mocktail: ^0.3.0
+  test: ^1.20.0
+  very_good_analysis: ^6.0.0
+
+flutter:
+  uses-material-design: true
