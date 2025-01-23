@@ -1,6 +1,7 @@
 export 'core/constants.dart';
 export 'features/car_catalog/car_catalog_screen.dart';
-export 'features/car_catalog/data/repositories/parallelum_car_catalog_repository.dart';
+export 'features/car_catalog/data/repositories/remote_car_catalog_repository.dart';
+export 'features/car_catalog/data/services/parallelum_car_catalog_service.dart';
 export 'features/car_catalog/interactor/car_catalog_interactor.dart';
 export 'features/car_catalog/interactor/car_catalog_view_states.dart';
 export 'features/car_catalog/interactor/models/car_brand_model.dart';

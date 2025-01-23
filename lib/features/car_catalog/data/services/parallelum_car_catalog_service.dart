@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:app_architecture_example/app_architecture_example.dart';
 import 'package:http/http.dart';
 
-class ParallelumCarCatalogRepository implements CarCatalogRepository {
-  ParallelumCarCatalogRepository(
+class ParallelumCarCatalogService {
+  ParallelumCarCatalogService(
     this._client, {
     required this.baseUrl,
   });
@@ -12,8 +12,7 @@ class ParallelumCarCatalogRepository implements CarCatalogRepository {
   final Client _client;
   final String baseUrl;
 
-  @override
-  Future<CarCatalogViewState> fetchCarBrands() async {
+  Future<List<CarBrandModel>> fetchCarBrands() async {
     try {
       final response = await _client.get(Uri.parse('$baseUrl/cars/brands'));
 
@@ -23,21 +22,20 @@ class ParallelumCarCatalogRepository implements CarCatalogRepository {
             .map(CarBrandModel.fromJson)
             .toList();
 
-        return CarBrandsSuccess(carBrands);
+        return carBrands;
       } else {
-        return CarCatalogFailure(
+        throw Exception(
           'Failed to fetch car brands catalog. Status code: ${response.statusCode}',
         );
       }
     } catch (error) {
-      return CarCatalogFailure(
+      throw Exception(
         'Failed to fetch car brands catalog: $error',
       );
     }
   }
 
-  @override
-  Future<CarCatalogViewState> fetchCarModelsByBrand(int brandId) async {
+  Future<List<CarSpecModel>> fetchCarModelsByBrand(int brandId) async {
     try {
       final response =
           await _client.get(Uri.parse('$baseUrl/cars/brands/$brandId/models'));
@@ -48,14 +46,14 @@ class ParallelumCarCatalogRepository implements CarCatalogRepository {
             .map(CarSpecModel.fromJson)
             .toList();
 
-        return CarModelsByBrandSuccess(carModels);
+        return carModels;
       } else {
-        return CarCatalogFailure(
+        throw Exception(
           'Failed to fetch car models catalog. Status code: ${response.statusCode}',
         );
       }
     } catch (error) {
-      return CarCatalogFailure(
+      throw Exception(
         'Failed to fetch car models catalog: $error',
       );
     }
