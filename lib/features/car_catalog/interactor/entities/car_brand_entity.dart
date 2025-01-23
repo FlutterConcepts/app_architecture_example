@@ -7,7 +7,7 @@ part 'car_brand_entity.g.dart';
 @freezed
 class CarBrandEntity with _$CarBrandEntity {
   const factory CarBrandEntity({
-    @JsonKey(fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
+    @JsonKey(fromJson: TypeParser.stringToInt, toJson: TypeParser.intToString)
     required int code,
     required String name,
   }) = _CarBrandEntity;

@@ -20,7 +20,7 @@ CarBrandEntity _$CarBrandEntityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CarBrandEntity {
-  @JsonKey(fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
+  @JsonKey(fromJson: TypeParser.stringToInt, toJson: TypeParser.intToString)
   int get code => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
@@ -42,7 +42,7 @@ abstract class $CarBrandEntityCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(
-          fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
+          fromJson: TypeParser.stringToInt, toJson: TypeParser.intToString)
       int code,
       String name});
 }
@@ -88,7 +88,7 @@ abstract class _$$CarBrandEntityImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(
-          fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
+          fromJson: TypeParser.stringToInt, toJson: TypeParser.intToString)
       int code,
       String name});
 }
@@ -127,7 +127,7 @@ class __$$CarBrandEntityImplCopyWithImpl<$Res>
 class _$CarBrandEntityImpl implements _CarBrandEntity {
   const _$CarBrandEntityImpl(
       {@JsonKey(
-          fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
+          fromJson: TypeParser.stringToInt, toJson: TypeParser.intToString)
       required this.code,
       required this.name});
 
@@ -135,7 +135,7 @@ class _$CarBrandEntityImpl implements _CarBrandEntity {
       _$$CarBrandEntityImplFromJson(json);
 
   @override
-  @JsonKey(fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
+  @JsonKey(fromJson: TypeParser.stringToInt, toJson: TypeParser.intToString)
   final int code;
   @override
   final String name;
@@ -178,7 +178,7 @@ class _$CarBrandEntityImpl implements _CarBrandEntity {
 abstract class _CarBrandEntity implements CarBrandEntity {
   const factory _CarBrandEntity(
       {@JsonKey(
-          fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
+          fromJson: TypeParser.stringToInt, toJson: TypeParser.intToString)
       required final int code,
       required final String name}) = _$CarBrandEntityImpl;
 
@@ -186,7 +186,7 @@ abstract class _CarBrandEntity implements CarBrandEntity {
       _$CarBrandEntityImpl.fromJson;
 
   @override
-  @JsonKey(fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
+  @JsonKey(fromJson: TypeParser.stringToInt, toJson: TypeParser.intToString)
   int get code;
   @override
   String get name;
