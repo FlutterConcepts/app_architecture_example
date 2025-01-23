@@ -11,7 +11,7 @@ class RemoteCarCatalogRepository implements CarCatalogRepository {
     return result.fold(
       CarBrandsSuccess.new,
       (error) => CarCatalogFailure(
-        'Failed to fetch car brands catalog: $error',
+        'Failed to fetch car brands catalog. $error',
       ), // Falha
     );
   }
@@ -22,7 +22,7 @@ class RemoteCarCatalogRepository implements CarCatalogRepository {
     return result.fold(
       CarModelsByBrandSuccess.new,
       (error) => CarCatalogFailure(
-        'Failed to fetch car models catalog: $error',
+        'Failed to fetch car models catalog. $error',
       ), // Falha
     );
   }

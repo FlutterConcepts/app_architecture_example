@@ -59,7 +59,7 @@ void main() {
       final failureState = newState as CarCatalogFailure;
       expect(
         failureState.message,
-        'Failed to fetch car brands catalog: $mockException',
+        'Failed to fetch car brands catalog. $mockException',
       );
       verify(() => mockService.fetchCarBrands()).called(1);
     });
@@ -107,7 +107,7 @@ void main() {
       final failureState = newState as CarCatalogFailure;
       expect(
         failureState.message,
-        'Failed to fetch car models catalog: $mockException',
+        'Failed to fetch car models catalog. $mockException',
       );
       verify(() => mockService.fetchCarModelsByBrand(brandId)).called(1);
     });

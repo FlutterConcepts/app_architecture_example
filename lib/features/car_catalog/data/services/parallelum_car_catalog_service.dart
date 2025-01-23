@@ -57,14 +57,14 @@ class ParallelumCarCatalogService {
       } else {
         return Failure(
           Exception(
-            'Failed to fetch car models catalog. Status code: ${response.statusCode}',
+            'Status code: ${response.statusCode}',
           ),
         );
       }
     } catch (error) {
       return Failure(
         Exception(
-          'Failed to fetch car models catalog. Error: $error',
+          'Error: $error',
         ),
       );
     }
