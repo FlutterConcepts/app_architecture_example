@@ -27,50 +27,15 @@ class _CarCatalogPageState extends State<CarCatalogPage> {
         title: const Text(Constants.appName),
       ),
       body: switch (interactor.value) {
-        CarCatalogLoading() => const Center(
-            key: Key('CarCatalogLoading'),
-            child: CircularProgressIndicator(),
-          ),
+        CarCatalogLoading() => const CarCatalogLoadingView(),
         CarBrandsSuccess(carBrands: final List<CarBrandModel> carBrands) =>
-          ListView.builder(
-            key: const Key('CarBrandsSuccess'),
-            padding: const EdgeInsets.all(16),
-            itemCount: carBrands.length,
-            itemBuilder: (_, index) {
-              final brand = carBrands[index];
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: TextButton(
-                    onPressed: () =>
-                        interactor.fetchCarModelsByBrand(brand.code),
-                    child: Text('Código: ${brand.code} | Marca: ${brand.name}'),
-                  ),
-                ),
-              );
-            },
-          ),
+          CarBrandsSuccessView(carBrands: carBrands),
         CarModelsByBrandSuccess(
           carModels: final List<CarSpecModel> carModels
         ) =>
-          ListView.builder(
-            key: const Key('CarModelsByBrandSuccess'),
-            padding: const EdgeInsets.all(16),
-            itemCount: carModels.length,
-            itemBuilder: (_, index) {
-              final model = carModels[index];
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text('Código: ${model.code} | Modelo: ${model.name}'),
-                ),
-              );
-            },
-          ),
-        CarCatalogFailure(message: final String message) => Center(
-            key: const Key('CarCatalogFailure'),
-            child: Text(message),
-          ),
+          CarModelsByBrandSuccessView(carModels: carModels),
+        CarCatalogFailure(message: final String message) =>
+          CarCatalogFailureView(message: message),
       },
       floatingActionButton: FloatingActionButton(
         onPressed: interactor.fetchCarBrands,

@@ -9,3 +9,7 @@ export 'features/car_catalog/interactor/models/car_spec_model.dart';
 export 'features/car_catalog/interactor/repositories/car_catalog_repository.dart';
 export 'features/car_catalog/ui/car_catalog_page.dart';
 export 'features/car_catalog/ui/car_catalog_provider.dart';
+export 'features/car_catalog/ui/views/car_brands_success_view.dart';
+export 'features/car_catalog/ui/views/car_catalog_failure_view.dart';
+export 'features/car_catalog/ui/views/car_catalog_loading_view.dart';
+export 'features/car_catalog/ui/views/car_models_by_brand_success_view.dart';
