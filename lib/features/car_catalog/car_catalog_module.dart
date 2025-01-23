@@ -1,6 +1,6 @@
+import 'package:app_architecture_example/app_architecture_example.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
-import 'package:minicore_arch_example/minicore_arch_example.dart';
 
 class CarCatalogModule extends StatelessWidget {
   const CarCatalogModule({super.key});

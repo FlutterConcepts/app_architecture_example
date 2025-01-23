@@ -1,5 +1,5 @@
+import 'package:app_architecture_example/app_architecture_example.dart';
 import 'package:flutter/material.dart';
-import 'package:minicore_arch_example/minicore_arch_example.dart';
 
 void main() {
   runApp(const App());
@@ -11,7 +11,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MiniCore Arch',
+      title: Constants.appName,
       initialRoute: CarCatalogModule.initialRoute,
       routes: {
         CarCatalogModule.initialRoute: (_) => const CarCatalogModule(),

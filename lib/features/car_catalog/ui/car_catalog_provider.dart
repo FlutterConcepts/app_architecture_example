@@ -1,5 +1,5 @@
+import 'package:app_architecture_example/app_architecture_example.dart';
 import 'package:flutter/widgets.dart';
-import 'package:minicore_arch_example/minicore_arch_example.dart';
 
 class CarCatalogProvider extends InheritedNotifier<CarCatalogInteractor> {
   const CarCatalogProvider({

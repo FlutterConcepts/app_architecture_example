@@ -1,5 +1,5 @@
+import 'package:app_architecture_example/app_architecture_example.dart';
 import 'package:flutter/material.dart';
-import 'package:minicore_arch_example/minicore_arch_example.dart';
 
 class CarCatalogPage extends StatefulWidget {
   const CarCatalogPage({super.key});
@@ -24,7 +24,7 @@ class _CarCatalogPageState extends State<CarCatalogPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('MiniCore Arch Example'),
+        title: const Text(Constants.appName),
       ),
       body: switch (interactor.value) {
         CarCatalogLoading() => const Center(

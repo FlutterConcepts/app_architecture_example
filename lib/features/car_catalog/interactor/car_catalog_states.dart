@@ -1,4 +1,4 @@
-import 'package:minicore_arch_example/minicore_arch_example.dart';
+import 'package:app_architecture_example/app_architecture_example.dart';
 
 sealed class CarCatalogState {}
 
