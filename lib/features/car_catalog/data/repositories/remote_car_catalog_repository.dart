@@ -7,27 +7,24 @@ class RemoteCarCatalogRepository implements CarCatalogRepository {
 
   @override
   Future<CarCatalogViewState> fetchCarBrands() async {
-    try {
-      final carBrands = await _service.fetchCarBrands();
-
-      return CarBrandsSuccess(carBrands);
-    } catch (error) {
-      return CarCatalogFailure(
+    final carBrandsResult = await _service.fetchCarBrands();
+    return carBrandsResult.fold(
+      CarBrandsSuccess.new,
+      (error) => CarCatalogFailure(
         'Failed to fetch car brands catalog: $error',
-      );
-    }
+      ), // Falha
+    );
   }
 
   @override
   Future<CarCatalogViewState> fetchCarModelsByBrand(int brandId) async {
-    try {
-      final carModels = await _service.fetchCarModelsByBrand(brandId);
+    final carModels = await _service.fetchCarModelsByBrand(brandId);
 
-      return CarModelsByBrandSuccess(carModels);
-    } catch (error) {
-      return CarCatalogFailure(
+    return carModels.fold(
+      CarModelsByBrandSuccess.new,
+      (error) => CarCatalogFailure(
         'Failed to fetch car models catalog: $error',
-      );
-    }
+      ), // Falha
+    );
   }
 }

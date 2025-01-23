@@ -25,7 +25,7 @@ void main() {
     });
 
     test(
-        'Should fetch car brands and return a list of CarBrandModel on success',
+        'Should fetch car brands and return a success Result with a list of CarBrandModel',
         () async {
       // Arrange
       final mockResponseData = jsonEncode(
@@ -44,26 +44,43 @@ void main() {
       final result = await service.fetchCarBrands();
 
       // Assert
-      expect(result, isA<List<CarBrandModel>>());
-      expect(result.length, 5);
+      expect(result.isSuccess(), isTrue);
+      result.onSuccess(
+        (data) {
+          expect(data, isA<List<CarBrandModel>>());
+          expect(data.length, 5);
+        },
+      ).onFailure(
+        (_) => fail('Expected success but got failure'),
+      );
       verify(() => mockClient.get(any())).called(1);
     });
 
-    test('Should throw an exception when API call fails', () async {
+    test(
+        'Should return a failure Result when API call for car brands fails with non-200 status',
+        () async {
       // Arrange
       const mockStatusCode = 404;
       when(() => mockClient.get(any()))
           .thenAnswer((_) async => Response('', mockStatusCode));
 
-      // Act & Assert
-      expect(
-        () async => service.fetchCarBrands(),
-        throwsA(isA<Exception>()),
-      );
+      // Act
+      final result = await service.fetchCarBrands();
+
+      // Assert
+      expect(result.isError(), isTrue);
+      result
+          .onSuccess(
+        (_) => fail('Expected failure but got success'),
+      )
+          .onFailure((error) {
+        expect(error, isA<Exception>());
+      });
       verify(() => mockClient.get(any())).called(1);
     });
 
-    test('Should fetch car models by brand and return a list of CarSpecModel',
+    test(
+        'Should fetch car models by brand and return a success Result with a list of CarSpecModel',
         () async {
       // Arrange
       const brandId = 1;
@@ -83,14 +100,20 @@ void main() {
       final result = await service.fetchCarModelsByBrand(brandId);
 
       // Assert
-      expect(result, isA<List<CarSpecModel>>());
-      expect(result.length, 5);
+      expect(result.isSuccess(), isTrue);
+      result.onSuccess((data) {
+        expect(data, isA<List<CarSpecModel>>());
+        expect(data.length, 5);
+      }).onFailure(
+        (_) => fail('Expected success but got failure'),
+      );
       verify(
         () => mockClient.get(Uri.parse('$baseUrl/cars/brands/$brandId/models')),
       ).called(1);
     });
 
-    test('Should throw an exception when API call for car models fails',
+    test(
+        'Should return a failure Result when API call for car models fails with non-200 status',
         () async {
       // Arrange
       const brandId = 1;
@@ -99,10 +122,19 @@ void main() {
         () => mockClient.get(Uri.parse('$baseUrl/cars/brands/$brandId/models')),
       ).thenAnswer((_) async => Response('', mockStatusCode));
 
-      // Act & Assert
-      expect(
-        () async => service.fetchCarModelsByBrand(brandId),
-        throwsA(isA<Exception>()),
+      // Act
+      final result = await service.fetchCarModelsByBrand(brandId);
+
+      // Assert
+      expect(result.isError(), isTrue);
+      result
+          .onSuccess(
+        (_) => fail('Expected failure but got success'),
+      )
+          .onFailure(
+        (error) {
+          expect(error, isA<Exception>());
+        },
       );
       verify(
         () => mockClient.get(Uri.parse('$baseUrl/cars/brands/$brandId/models')),

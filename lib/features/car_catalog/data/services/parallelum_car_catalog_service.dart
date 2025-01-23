@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:app_architecture_example/app_architecture_example.dart';
 import 'package:http/http.dart';
+import 'package:result_dart/result_dart.dart';
 
 class ParallelumCarCatalogService {
   ParallelumCarCatalogService(
@@ -12,7 +13,7 @@ class ParallelumCarCatalogService {
   final Client _client;
   final String baseUrl;
 
-  Future<List<CarBrandModel>> fetchCarBrands() async {
+  AsyncResult<List<CarBrandModel>> fetchCarBrands() async {
     try {
       final response = await _client.get(Uri.parse('$baseUrl/cars/brands'));
 
@@ -22,20 +23,26 @@ class ParallelumCarCatalogService {
             .map(CarBrandModel.fromJson)
             .toList();
 
-        return carBrands;
+        return Success(carBrands);
       } else {
-        throw Exception(
-          'Failed to fetch car brands catalog. Status code: ${response.statusCode}',
+        return Failure(
+          Exception(
+            'Failed to fetch car brands catalog. Status code: ${response.statusCode}',
+          ),
         );
       }
     } catch (error) {
-      throw Exception(
-        'Failed to fetch car brands catalog: $error',
+      return Failure(
+        Exception(
+          'Failed to fetch car brands catalog: $error',
+        ),
       );
     }
   }
 
-  Future<List<CarSpecModel>> fetchCarModelsByBrand(int brandId) async {
+  AsyncResult<List<CarSpecModel>> fetchCarModelsByBrand(
+    int brandId,
+  ) async {
     try {
       final response =
           await _client.get(Uri.parse('$baseUrl/cars/brands/$brandId/models'));
@@ -46,15 +53,19 @@ class ParallelumCarCatalogService {
             .map(CarSpecModel.fromJson)
             .toList();
 
-        return carModels;
+        return Success(carModels);
       } else {
-        throw Exception(
-          'Failed to fetch car models catalog. Status code: ${response.statusCode}',
+        return Failure(
+          Exception(
+            'Failed to fetch car models catalog. Status code: ${response.statusCode}',
+          ),
         );
       }
     } catch (error) {
-      throw Exception(
-        'Failed to fetch car models catalog: $error',
+      return Failure(
+        Exception(
+          'Failed to fetch car models catalog: $error',
+        ),
       );
     }
   }

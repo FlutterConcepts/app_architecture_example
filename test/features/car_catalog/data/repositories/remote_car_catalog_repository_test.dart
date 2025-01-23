@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:app_architecture_example/app_architecture_example.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:result_dart/result_dart.dart';
 
 class MockClient extends Mock implements Client {}
 
@@ -36,7 +35,7 @@ void main() {
         );
       });
       when(() => mockService.fetchCarBrands())
-          .thenAnswer((_) async => mockCarBrands);
+          .thenAnswer((_) async => Success(mockCarBrands));
 
       // Act
       final result = await sut.fetchCarBrands();
@@ -48,12 +47,12 @@ void main() {
       verify(() => mockService.fetchCarBrands()).called(1);
     });
 
-    test('Should return CarCatalogFailure when service throws an exception',
+    test('Should return CarCatalogFailure when service fetchCarBrands fails',
         () async {
       // Arrange
-      final mockExceptionMessage = faker.lorem.sentence();
+      final mockException = Exception(faker.lorem.sentence());
       when(() => mockService.fetchCarBrands())
-          .thenThrow(Exception(mockExceptionMessage));
+          .thenAnswer((_) async => Failure(mockException));
 
       // Act
       final result = await sut.fetchCarBrands();
@@ -63,7 +62,7 @@ void main() {
       final failureState = result as CarCatalogFailure;
       expect(
         failureState.message,
-        'Failed to fetch car brands catalog: Exception: $mockExceptionMessage',
+        'Failed to fetch car brands catalog: $mockException',
       );
       verify(() => mockService.fetchCarBrands()).called(1);
     });
@@ -82,7 +81,7 @@ void main() {
         );
       });
       when(() => mockService.fetchCarModelsByBrand(brandId))
-          .thenAnswer((_) async => mockCarModels);
+          .thenAnswer((_) async => Success(mockCarModels));
 
       // Act
       final result = await sut.fetchCarModelsByBrand(brandId);
@@ -94,13 +93,14 @@ void main() {
       verify(() => mockService.fetchCarModelsByBrand(brandId)).called(1);
     });
 
-    test('Should return CarCatalogFailure when service throws an exception',
+    test(
+        'Should return CarCatalogFailure when service fetchCarModelsByBrand fails',
         () async {
       // Arrange
       const brandId = 1;
-      final mockExceptionMessage = faker.lorem.sentence();
+      final mockException = Exception(faker.lorem.sentence());
       when(() => mockService.fetchCarModelsByBrand(brandId))
-          .thenThrow(Exception(mockExceptionMessage));
+          .thenAnswer((_) async => Failure(mockException));
 
       // Act
       final result = await sut.fetchCarModelsByBrand(brandId);
@@ -110,105 +110,9 @@ void main() {
       final failureState = result as CarCatalogFailure;
       expect(
         failureState.message,
-        'Failed to fetch car models catalog: Exception: $mockExceptionMessage',
+        'Failed to fetch car models catalog: $mockException',
       );
       verify(() => mockService.fetchCarModelsByBrand(brandId)).called(1);
-    });
-  });
-
-  group('ParallelumCarCatalogService Tests |', () {
-    late MockClient mockClient;
-    late ParallelumCarCatalogService service;
-    late String baseUrl;
-
-    setUp(() {
-      mockClient = MockClient();
-      baseUrl = faker.internet.httpsUrl();
-      service = ParallelumCarCatalogService(mockClient, baseUrl: baseUrl);
-    });
-
-    test(
-        'Should fetch car brands and return a list of CarBrandModel on success',
-        () async {
-      // Arrange
-      final mockResponseData = jsonEncode(
-        List.generate(5, (_) {
-          return {
-            'code': faker.randomGenerator.integer(1000, min: 1).toString(),
-            'name': faker.vehicle.model(),
-          };
-        }),
-      );
-      when(() => mockClient.get(any()))
-          .thenAnswer((_) async => Response(mockResponseData, 200));
-
-      // Act
-      final result = await service.fetchCarBrands();
-
-      // Assert
-      expect(result, isA<List<CarBrandModel>>());
-      expect(result.length, 5);
-      verify(() => mockClient.get(any())).called(1);
-    });
-
-    test('Should throw an exception when API call fails', () async {
-      // Arrange
-      const mockStatusCode = 404;
-      when(() => mockClient.get(any()))
-          .thenAnswer((_) async => Response('', mockStatusCode));
-
-      // Act & Assert
-      expect(
-        () async => service.fetchCarBrands(),
-        throwsA(isA<Exception>()),
-      );
-      verify(() => mockClient.get(any())).called(1);
-    });
-
-    test('Should fetch car models by brand and return a list of CarSpecModel',
-        () async {
-      // Arrange
-      const brandId = 1;
-      final mockResponseData = jsonEncode(
-        List.generate(5, (_) {
-          return {
-            'code': faker.randomGenerator.integer(1000, min: 1).toString(),
-            'name': faker.vehicle.model(),
-          };
-        }),
-      );
-      when(
-        () => mockClient.get(Uri.parse('$baseUrl/cars/brands/$brandId/models')),
-      ).thenAnswer((_) async => Response(mockResponseData, 200));
-
-      // Act
-      final result = await service.fetchCarModelsByBrand(brandId);
-
-      // Assert
-      expect(result, isA<List<CarSpecModel>>());
-      expect(result.length, 5);
-      verify(
-        () => mockClient.get(Uri.parse('$baseUrl/cars/brands/$brandId/models')),
-      ).called(1);
-    });
-
-    test('Should throw an exception when API call for car models fails',
-        () async {
-      // Arrange
-      const brandId = 1;
-      const mockStatusCode = 404;
-      when(
-        () => mockClient.get(Uri.parse('$baseUrl/cars/brands/$brandId/models')),
-      ).thenAnswer((_) async => Response('', mockStatusCode));
-
-      // Act & Assert
-      expect(
-        () async => service.fetchCarModelsByBrand(brandId),
-        throwsA(isA<Exception>()),
-      );
-      verify(
-        () => mockClient.get(Uri.parse('$baseUrl/cars/brands/$brandId/models')),
-      ).called(1);
     });
   });
 }
