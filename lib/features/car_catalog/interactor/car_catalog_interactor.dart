@@ -1,7 +1,7 @@
 import 'package:app_architecture_example/app_architecture_example.dart';
 import 'package:flutter/material.dart';
 
-class CarCatalogInteractor extends ValueNotifier<CarCatalogState> {
+class CarCatalogInteractor extends ValueNotifier<CarCatalogPageState> {
   CarCatalogInteractor(this.repository) : super(CarCatalogLoading());
 
   final CarCatalogRepository repository;

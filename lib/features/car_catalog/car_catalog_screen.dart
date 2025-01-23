@@ -2,8 +2,8 @@ import 'package:app_architecture_example/app_architecture_example.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
 
-class CarCatalogModule extends StatelessWidget {
-  const CarCatalogModule({super.key});
+class CarCatalogScreen extends StatelessWidget {
+  const CarCatalogScreen({super.key});
 
   static const initialRoute = '/carCatalog';
 

@@ -12,9 +12,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: Constants.appName,
-      initialRoute: CarCatalogModule.initialRoute,
+      initialRoute: CarCatalogScreen.initialRoute,
       routes: {
-        CarCatalogModule.initialRoute: (_) => const CarCatalogModule(),
+        CarCatalogScreen.initialRoute: (_) => const CarCatalogScreen(),
       },
     );
   }
