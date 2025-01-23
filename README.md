@@ -1,367 +1,285 @@
-# MiniCore Arch Example
+# Flutter App Architecture Example
 
 **Available in English 🇺🇸 and Portuguese 🇧🇷**
 
 🇺🇸
 
-This repository is based on the original project [mini_core_example](https://github.com/viniciusddrft/mini_core_exemple) by [Vinícius](https://github.com/viniciusddrft), with enhancements and new features.
-
-**MiniCore Arch** is an innovative approach created by the **Flutterando** community, based on **Clean Architecture**, designed to provide a simple yet robust way to structure Flutter projects. This project serves as a practical example of how to efficiently organize your code, reducing complexity without compromising quality and scalability.
+This repository showcases a practical implementation of the **Flutter App Architecture**, the official architecture guide provided by Google for Flutter applications. The project is designed to demonstrate best practices for structuring a Flutter app, focusing on modularity, testability, and scalability.
 
 ---
 
-## Official Documentation
+## 📖 **Official Documentation**
 
-Check out the official documentation for more details about MiniCore Arch:  
-[MiniCore Arch on GitHub](https://github.com/Flutterando/minicore)
+For an in-depth understanding of Flutter's recommended architecture, please refer to the [official guide](https://docs.flutter.dev/app-architecture/guide).
 
 ---
 
-## 🚀 **Getting Started with MiniCore Arch**
+## 🚀 **Getting Started**
 
-Follow the steps below to explore this example:
+Follow these steps to explore this example:
 
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/FlutterConcepts/minicore_arch.git
+   git clone https://github.com/FlutterConcepts/app_architecture_example.git
    ```
 
-2. **Open the project in VSCode**.
+2. **Open the project in VSCode or your preferred IDE**.
 
-3. **Run the project or tests**:
-   - Press `F5` to execute all tests or start the Flutter Web project.
+3. **Run the project**:
 
-## **Core Explanation of Each Module**
+   - Press `F5` or run the following command to start the app:
+     ```bash
+     flutter run
+     ```
 
-### **Layer Structure and Relationships**
-
-- **Main**:
-
-  - Serves as the entry point of the application and knows all layers.
-  - Responsible for initializing dependencies and connecting modules.
-
-- **UI (User Interface)**:
-
-  - Depends exclusively on the **Interactor** layer to execute business logic.
-  - Does not interact directly with the **Data** layer, ensuring responsibility isolation.
-
-- **Interactor (Business Logic Layer)**:
-
-  - Acts as the intermediary between **UI** and **Data** layers.
-  - Centralizes business rules, keeping them decoupled from other layers.
-  - Does not have direct dependencies on any other layer.
-
-- **Data (Data Layer)**:
-  - Responsible for accessing external data sources, such as APIs, databases, or local services.
-  - Depends on the **Interactor** layer to understand which data to provide or persist.
-  - Does not interact directly with the **UI** layer, ensuring that presentation logic remains independent.
-
-### MiniCore Architecture Data Flow Diagram:
-
-![MiniCore Architecture Data Flow Diagram](docs/images/minicore_arch.png)
-
-### Clean Architecture Data Flow Diagram:
-
-![Clean Architecture Data Flow Diagram](docs/images/clean_arch.png)
+4. **Run the tests**:
+   ```bash
+   flutter test
+   ```
 
 ---
 
-### **General Communication Flow**
+## 📂 **Project Structure**
 
-1. The **UI (User Interface)** sends a request to the **Interactor** to initiate an operation.
-2. The **Interactor (Business Logic)** processes the request and decides what action to take.
-3. The **Interactor** requests the necessary data from the **Data (Data Layer)**, which performs operations like API calls or database queries.
-4. The **Data** layer returns the results to the **Interactor**, which processes the raw data and transforms it into meaningful information.
-5. The **Interactor** returns the final state or processed data to the **UI**, which presents it to the user.
+The project adheres to the modular and layered architecture recommended by Google, as detailed in the [Flutter App Architecture Guide](https://docs.flutter.dev/app-architecture/guide). Below is an overview of the layers and their responsibilities:
+
+### **Layered Architecture**
+
+- **Presentation Layer (UI + ViewModel)**:
+
+  - Handles user interactions and updates the UI based on state changes.
+  - Interacts with the `Application Layer` to execute business logic.
+  - Uses Flutter’s state management solutions, such as `ChangeNotifier`, `ValueNotifier`, or third-party tools like `Bloc`.
+
+- **Application Layer (Use Cases)**:
+
+  - Encapsulates the business logic of the application.
+  - Acts as the intermediary between the `Presentation Layer` and the `Data Layer`.
+  - Defines **Use Cases** to represent the core functionalities of the app.
+
+- **Data Layer**:
+  - Manages data retrieval and persistence.
+  - Responsible for interacting with APIs, databases, or other external data sources.
+  - Converts raw data into entities that the `Application Layer` understands.
 
 ---
 
-### **Simplified Visualization**
+## 🔄 **Data Flow**
+
+The architecture promotes unidirectional data flow, ensuring a predictable and maintainable codebase:
+
+1. **User Interaction**:
+
+   - A user triggers an action in the `Presentation Layer` (e.g., clicking a button).
+
+2. **Business Logic**:
+
+   - The `Application Layer` processes the request using a `Use Case`.
+
+3. **Data Retrieval**:
+
+   - The `Data Layer` fetches the required data from an API or database.
+
+4. **State Update**:
+
+   - The `Application Layer` processes the data and updates the state.
+
+5. **UI Update**:
+   - The `Presentation Layer` listens for state changes and updates the user interface.
+
+---
+
+## 🎨 **Simplified Layer Diagram**
 
 ```
-Main (Entry Point)
-│
-├── UI (User Interface)
-│      ↓
-│  Interactor (Business Logic)
-│      ↑
-├── Data (Data Layer)
+Presentation Layer
+    ↓
+Application Layer
+    ↓
+Data Layer
 ```
 
 ---
 
-### **Key Responsibilities**
+## 💡 **Key Features**
 
-- **Main**:
+- **Modularity**:
 
-  - Manages dependency creation and injection.
-  - Connects layers in an orderly manner.
+  - Each layer is independently testable and follows the separation of concerns principle.
 
-- **UI**:
+- **Scalability**:
 
-  - Focuses only on presentation and user interaction.
-  - Does not contain business logic or directly handle raw data.
+  - The architecture is designed to handle large, complex applications by enforcing clear boundaries between layers.
 
-- **Interactor**:
+- **Testability**:
+  - Unit tests are focused on `Use Cases` and `Data Sources`, while integration and widget tests ensure the overall app functionality.
 
-  - Centralizes all business logic, ensuring separation of concerns.
-  - Prevents direct dependencies between the **UI** and **Data** layers.
+---
 
-- **Data**:
-  - Exclusively handles data storage, retrieval, and persistence operations.
-  - Ensures data manipulation is abstracted and modular.
+## 🧪 **Testing Strategy**
+
+- **Unit Tests**:
+
+  - Test individual `Use Cases` and `Data Sources`.
+
+- **Widget Tests**:
+
+  - Verify the functionality of UI components.
+
+- **Integration Tests**:
+  - Ensure the app works as expected when all parts are integrated.
+
+Run all tests with:
+
+```bash
+flutter test
+```
 
 ---
 
 ## 💡 **How to Contribute**
 
-Contributions are very welcome! Feel free to suggest improvements, report issues, or propose new features.
-
-- Open an **issue** to discuss ideas.
-- Submit a **pull request** to share your contributions with the community.
+Contributions are very welcome! Feel free to open issues or pull requests to improve this example.
 
 ---
 
 🇧🇷
 
-Este repositório é baseado no projeto original [mini_core_example](https://github.com/viniciusddrft/mini_core_exemple) de [Vinícius](https://github.com/viniciusddrft), com aprimoramentos e novas funcionalidades.
-
-**MiniCore Arch** é uma abordagem inovadora criada pela comunidade do **Flutterando**, baseada no **Clean Architecture**, com o objetivo de oferecer uma maneira simples e robusta de estruturar projetos Flutter. Este projeto é um exemplo prático que demonstra como organizar seu código de forma eficiente, reduzindo a complexidade sem comprometer a qualidade e a escalabilidade.
+Este repositório demonstra uma implementação prática da **Flutter App Architecture**, o guia oficial de arquitetura da Google para aplicativos Flutter. O projeto é projetado para demonstrar as melhores práticas para estruturar um app Flutter, com foco em modularidade, testabilidade e escalabilidade.
 
 ---
 
-## Documentação Oficial
+## 📖 **Documentação Oficial**
 
-Acesse a documentação oficial para mais detalhes sobre o MiniCore Arch:  
-[MiniCore Arch no GitHub](https://github.com/Flutterando/minicore)
+Para um entendimento aprofundado da arquitetura recomendada pelo Flutter, consulte o [guia oficial](https://docs.flutter.dev/app-architecture/guide).
 
 ---
 
-## 🚀 **Começando com o MiniCore Arch**
+## 🚀 **Começando**
 
-Siga os passos abaixo para começar a explorar este exemplo:
+Siga os passos abaixo para explorar este exemplo:
 
 1. **Clone o repositório**:
 
    ```bash
-   git clone https://github.com/FlutterConcepts/minicore_arch.git
+   git clone https://github.com/FlutterConcepts/app_architecture_example.git
    ```
 
-2. **Abra o projeto no VSCode**.
+2. **Abra o projeto no VSCode ou na IDE de sua preferência**.
 
-3. **Execute o projeto ou os testes**:
-   - Pressione `F5` para rodar todos os testes ou iniciar o projeto Flutter Web.
+3. **Execute o projeto**:
 
-## **Explicação do Core de Cada Módulo**
+   - Pressione `F5` ou execute o seguinte comando:
+     ```bash
+     flutter run
+     ```
 
-### **Estrutura de Camadas e Relacionamentos**
-
-- **Main**:
-
-  - É o ponto de entrada da aplicação e conhece todas as camadas.
-  - Responsável por inicializar as dependências e conectar os módulos.
-
-- **UI (Interface do Usuário)**:
-
-  - Depende exclusivamente da camada **Interactor** para executar a lógica de negócios.
-  - Não interage diretamente com a camada **Data**, garantindo isolamento de responsabilidades.
-
-- **Interactor (Camada de Lógica de Negócios)**:
-
-  - Serve como intermediário entre a **UI** e a **Data**.
-  - Centraliza as regras de negócio, mantendo-as desacopladas das outras camadas.
-  - Não possui dependência direta de nenhuma camada.
-
-- **Data (Camada de Dados)**:
-  - Responsável por acessar fontes de dados externas, como APIs, bancos de dados ou serviços locais.
-  - Depende da camada **Interactor** para entender quais dados fornecer ou persistir.
-  - Não interage diretamente com a camada **UI**, assegurando que a lógica de apresentação seja independente.
-
-### Diagrama do Fluxo de Dados MiniCore Architecture:
-
-![Diagrama do Fluxo de Dados MiniCore Architecture](docs/images/minicore_arch.png)
-
-### Diagrama do Fluxo de Dados Clean Architecture:
-
-![Diagrama do Fluxo de Dados Clean Architecture](docs/images/clean_arch.png)
+4. **Execute os testes**:
+   ```bash
+   flutter test
+   ```
 
 ---
 
-### **Fluxo Geral de Comunicação**
+## 📂 **Estrutura do Projeto**
 
-1. **UI (Interface do Usuário)** faz uma solicitação à **Interactor** para iniciar uma operação.
-2. **Interactor (Lógica de Negócios)** processa a solicitação e decide qual ação tomar.
-3. **Interactor** solicita os dados necessários à **Data (Camada de Dados)**, que realiza operações como chamadas a APIs ou consultas em banco de dados.
-4. **Data** retorna os resultados para a **Interactor**, que processa os dados brutos e os transforma em informações úteis.
-5. **Interactor** retorna o estado final ou dados processados para a **UI**, que os apresenta ao usuário.
+O projeto segue a arquitetura modular e em camadas recomendada pela Google, conforme detalhado no [guia oficial de arquitetura do Flutter](https://docs.flutter.dev/app-architecture/guide). Abaixo está uma visão geral das camadas e suas responsabilidades:
+
+### **Arquitetura em Camadas**
+
+- **Camada de Apresentação (UI + ViewModel)**:
+
+  - Lida com interações do usuário e atualiza a interface com base em alterações de estado.
+  - Interage com a `Camada de Aplicação` para executar a lógica de negócios.
+  - Usa soluções de gerenciamento de estado do Flutter, como `ChangeNotifier`, `ValueNotifier` ou ferramentas de terceiros como `Bloc`.
+
+- **Camada de Aplicação (Casos de Uso)**:
+
+  - Encapsula a lógica de negócios da aplicação.
+  - Atua como intermediária entre a `Camada de Apresentação` e a `Camada de Dados`.
+  - Define os **Casos de Uso** que representam as principais funcionalidades do app.
+
+- **Camada de Dados**:
+  - Gerencia a recuperação e persistência de dados.
+  - Responsável por interagir com APIs, bancos de dados ou outras fontes de dados externas.
+  - Converte dados brutos em entidades que a `Camada de Aplicação` entende.
 
 ---
 
-### **Visualização Simplificada**
+## 🔄 **Fluxo de Dados**
+
+A arquitetura promove um fluxo de dados unidirecional, garantindo previsibilidade e manutenibilidade do código:
+
+1. **Interação do Usuário**:
+
+   - O usuário dispara uma ação na `Camada de Apresentação` (por exemplo, clicando em um botão).
+
+2. **Lógica de Negócios**:
+
+   - A `Camada de Aplicação` processa a solicitação usando um `Caso de Uso`.
+
+3. **Recuperação de Dados**:
+
+   - A `Camada de Dados` busca os dados necessários de uma API ou banco de dados.
+
+4. **Atualização de Estado**:
+
+   - A `Camada de Aplicação` processa os dados e atualiza o estado.
+
+5. **Atualização da UI**:
+   - A `Camada de Apresentação` ouve as alterações de estado e atualiza a interface do usuário.
+
+---
+
+## 🎨 **Diagrama Simplificado**
 
 ```
-Main (Ponto de Entrada)
-│
-├── UI (Interface do Usuário)
-│      ↓
-│    Interactor (Lógica de Negócios)
-│      ↑
-├── Data (Camada de Dados)
+Camada de Apresentação
+    ↓
+Camada de Aplicação
+    ↓
+Camada de Dados
 ```
 
 ---
 
-### **Responsabilidades Chave**
+## 💡 **Recursos Principais**
 
-- **Main**:
+- **Modularidade**:
 
-  - Gerencia a criação e injeção de dependências.
-  - Conecta as camadas de maneira ordenada.
+  - Cada camada é testável independentemente e segue o princípio de separação de responsabilidades.
 
-- **UI**:
+- **Escalabilidade**:
 
-  - Focada apenas na apresentação e na interação com o usuário.
-  - Não contém lógica de negócios nem manipula diretamente dados brutos.
+  - A arquitetura foi projetada para lidar com aplicativos grandes e complexos, definindo limites claros entre as camadas.
 
-- **Interactor**:
+- **Testabilidade**:
+  - Os testes unitários focam nos `Casos de Uso` e `Fontes de Dados`, enquanto os testes de integração e widget garantem a funcionalidade geral do app.
 
-  - Centraliza toda a lógica de negócios, garantindo a separação de preocupações.
-  - Evita que as camadas **UI** e **Data** tenham dependências diretas entre si.
+---
 
-- **Data**:
-  - Responsável exclusivamente por operações de armazenamento, recuperação e persistência de dados.
-  - Garante que a manipulação de fontes de dados seja abstraída e modular.
+## 🧪 **Estratégia de Testes**
+
+- **Testes Unitários**:
+
+  - Testam `Casos de Uso` individuais e `Fontes de Dados`.
+
+- **Testes de Widget**:
+
+  - Verificam a funcionalidade de componentes de UI.
+
+- **Testes de Integração**:
+  - Garantem que o aplicativo funcione como esperado quando todas as partes estão integradas.
+
+Execute todos os testes com:
+
+```bash
+flutter test
+```
 
 ---
 
 ## 💡 **Como Contribuir**
 
-Contribuições são muito bem-vindas! Sinta-se à vontade para sugerir melhorias, reportar problemas ou propor novas funcionalidades.
-
-- Abra uma **issue** para discutir ideias.
-- Envie um **pull request** para compartilhar suas contribuições com a comunidade.
-
----
-
-## Extras
-
-🇺🇸
-
-The term **"Interactor"** originates from English and can be understood as **"intermediary"** or **"interaction agent"**. In the context of software development, especially in architectures like **Clean Architecture** or **MVP**, the **Interactor** plays a significant role as **the layer responsible for the business logic of the application**.
-
----
-
-### **Meaning and Function**
-
-1. **Intermediary between UI and Data**:
-
-   - It connects the **UI (User Interface)** layer to the **Data** layer (which handles external sources like APIs or databases).
-   - Its main function is to **ensure that business logic remains isolated** from other layers.
-
-2. **Executes Business Rules**:
-
-   - All necessary processing or validation before sending or receiving data occurs within the Interactor.
-   - Example: calculating the total for a shopping cart, validating user information, or deciding which data to fetch from an API.
-
-3. **Decoupling**:
-   - It shields the UI layer from directly knowing the Data layer and vice versa.
-   - This promotes a cleaner, more modular design, making testing and maintenance easier.
-
----
-
-### **Why the Name "Interactor"?**
-
-The name "Interactor" refers to its primary role: **interacting with different parts of the system** (UI and Data) and acting as an intermediary between them, ensuring that business logic is applied correctly.
-
----
-
-### **Practical Example**
-
-Imagine an application that displays a car catalog:
-
-- **UI**:
-
-  - A "Fetch Car Brands" button is clicked.
-  - The UI sends a request to the **Interactor**.
-
-- **Interactor**:
-
-  - Receives the request from the UI.
-  - Decides to call the "Fetch Car Brands" use case.
-  - Processes the result and returns it to the UI.
-
-- **Data**:
-  - The use case makes an API call or queries a database to retrieve the requested data.
-
----
-
-### **Analogies**
-
-- Think of the Interactor as the **brain** of the system. It makes decisions and coordinates how information flows between other parts.
-- It’s also like a **translator**, ensuring that the UI and Data layers can communicate without knowing each other directly.
-
----
-
-**In summary**: The Interactor is a fundamental layer for organizing and centralizing business logic, ensuring the system is modular, testable, and well-structured.
-
----
-
-🇧🇷
-
-O termo **"Interactor"** vem do inglês e pode ser entendido como **"intermediador"** ou **"agente de interação"**. No contexto de desenvolvimento de software, especialmente em arquiteturas como **Clean Architecture** ou **MVP**, o **Interactor** desempenha um papel importante como **a camada responsável pela lógica de negócios da aplicação**.
-
----
-
-### **Significado e Função**
-
-1. **Intermediador entre UI e Data**:
-
-   - Ele conecta a camada de **UI (Interface do Usuário)** à camada de **Data** (que lida com fontes externas como APIs ou bancos de dados).
-   - Sua principal função é **garantir que a lógica de negócios permaneça isolada** das outras camadas.
-
-2. **Executa Regras de Negócio**:
-
-   - Todo o processamento ou validação necessária antes de enviar ou receber dados ocorre no Interactor.
-   - Exemplo: calcular o total de um carrinho de compras, validar informações do usuário, ou decidir qual dado buscar na API.
-
-3. **Desacoplamento**:
-   - Ele protege a camada de UI de conhecer diretamente a camada de Data e vice-versa.
-   - Isso promove um design mais limpo e modular, facilitando testes e manutenções.
-
----
-
-### **Por que o nome "Interactor"?**
-
-O nome "Interactor" é uma referência à sua função principal: **interagir com diferentes partes do sistema** (UI e Data) e atuar como um intermediário entre elas, garantindo que a lógica de negócios seja aplicada corretamente.
-
----
-
-### **Exemplo Prático**
-
-Imagine um aplicativo que exibe um catálogo de carros:
-
-- **UI**:
-
-  - Um botão "Buscar marcas de carros" é clicado.
-  - A UI envia uma solicitação para o **Interactor**.
-
-- **Interactor**:
-
-  - Recebe a solicitação da UI.
-  - Decide chamar o caso de uso de "Buscar marcas de carros".
-  - Processa o resultado e retorna para a UI.
-
-- **Data**:
-  - O caso de uso faz uma chamada à API ou consulta um banco de dados para obter os dados solicitados.
-
----
-
-### **Analogias**
-
-- Pense no Interactor como o **cérebro** do sistema. Ele toma decisões e coordena como as informações fluem entre as outras partes.
-- Ele também é como um **tradutor**, garantindo que a UI e o Data possam se comunicar sem se conhecer diretamente.
-
----
-
-**Em resumo**: O Interactor é uma camada fundamental para organizar e centralizar a lógica de negócios, garantindo que o sistema seja modular, testável e bem estruturado.
+Contribuições são muito bem-vindas! Sinta-se à vontade para abrir issues ou pull requests para melhorar este exemplo.
