@@ -1,4 +1,5 @@
 export 'core/constants.dart';
+export 'core/parse_mapper.dart';
 export 'features/car_catalog/car_catalog_screen.dart';
 export 'features/car_catalog/data/repositories/remote_car_catalog_repository.dart';
 export 'features/car_catalog/data/services/parallelum_car_catalog_service.dart';
