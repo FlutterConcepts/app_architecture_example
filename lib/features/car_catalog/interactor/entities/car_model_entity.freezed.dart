@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'car_spec_model.dart';
+part of 'car_model_entity.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,31 +14,31 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-CarSpecModel _$CarSpecModelFromJson(Map<String, dynamic> json) {
-  return _CarSpecModel.fromJson(json);
+CarModelEntity _$CarModelEntityFromJson(Map<String, dynamic> json) {
+  return _CarModelEntity.fromJson(json);
 }
 
 /// @nodoc
-mixin _$CarSpecModel {
+mixin _$CarModelEntity {
   @JsonKey(fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
   int get code => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
-  /// Serializes this CarSpecModel to a JSON map.
+  /// Serializes this CarModelEntity to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of CarSpecModel
+  /// Create a copy of CarModelEntity
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CarSpecModelCopyWith<CarSpecModel> get copyWith =>
+  $CarModelEntityCopyWith<CarModelEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CarSpecModelCopyWith<$Res> {
-  factory $CarSpecModelCopyWith(
-          CarSpecModel value, $Res Function(CarSpecModel) then) =
-      _$CarSpecModelCopyWithImpl<$Res, CarSpecModel>;
+abstract class $CarModelEntityCopyWith<$Res> {
+  factory $CarModelEntityCopyWith(
+          CarModelEntity value, $Res Function(CarModelEntity) then) =
+      _$CarModelEntityCopyWithImpl<$Res, CarModelEntity>;
   @useResult
   $Res call(
       {@JsonKey(
@@ -48,16 +48,16 @@ abstract class $CarSpecModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CarSpecModelCopyWithImpl<$Res, $Val extends CarSpecModel>
-    implements $CarSpecModelCopyWith<$Res> {
-  _$CarSpecModelCopyWithImpl(this._value, this._then);
+class _$CarModelEntityCopyWithImpl<$Res, $Val extends CarModelEntity>
+    implements $CarModelEntityCopyWith<$Res> {
+  _$CarModelEntityCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CarSpecModel
+  /// Create a copy of CarModelEntity
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -79,11 +79,11 @@ class _$CarSpecModelCopyWithImpl<$Res, $Val extends CarSpecModel>
 }
 
 /// @nodoc
-abstract class _$$CarSpecModelImplCopyWith<$Res>
-    implements $CarSpecModelCopyWith<$Res> {
-  factory _$$CarSpecModelImplCopyWith(
-          _$CarSpecModelImpl value, $Res Function(_$CarSpecModelImpl) then) =
-      __$$CarSpecModelImplCopyWithImpl<$Res>;
+abstract class _$$CarModelEntityImplCopyWith<$Res>
+    implements $CarModelEntityCopyWith<$Res> {
+  factory _$$CarModelEntityImplCopyWith(_$CarModelEntityImpl value,
+          $Res Function(_$CarModelEntityImpl) then) =
+      __$$CarModelEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,14 +94,14 @@ abstract class _$$CarSpecModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$CarSpecModelImplCopyWithImpl<$Res>
-    extends _$CarSpecModelCopyWithImpl<$Res, _$CarSpecModelImpl>
-    implements _$$CarSpecModelImplCopyWith<$Res> {
-  __$$CarSpecModelImplCopyWithImpl(
-      _$CarSpecModelImpl _value, $Res Function(_$CarSpecModelImpl) _then)
+class __$$CarModelEntityImplCopyWithImpl<$Res>
+    extends _$CarModelEntityCopyWithImpl<$Res, _$CarModelEntityImpl>
+    implements _$$CarModelEntityImplCopyWith<$Res> {
+  __$$CarModelEntityImplCopyWithImpl(
+      _$CarModelEntityImpl _value, $Res Function(_$CarModelEntityImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CarSpecModel
+  /// Create a copy of CarModelEntity
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -109,7 +109,7 @@ class __$$CarSpecModelImplCopyWithImpl<$Res>
     Object? code = null,
     Object? name = null,
   }) {
-    return _then(_$CarSpecModelImpl(
+    return _then(_$CarModelEntityImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -124,15 +124,15 @@ class __$$CarSpecModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CarSpecModelImpl implements _CarSpecModel {
-  const _$CarSpecModelImpl(
+class _$CarModelEntityImpl implements _CarModelEntity {
+  const _$CarModelEntityImpl(
       {@JsonKey(
           fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
       required this.code,
       required this.name});
 
-  factory _$CarSpecModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CarSpecModelImplFromJson(json);
+  factory _$CarModelEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CarModelEntityImplFromJson(json);
 
   @override
   @JsonKey(fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
@@ -142,14 +142,14 @@ class _$CarSpecModelImpl implements _CarSpecModel {
 
   @override
   String toString() {
-    return 'CarSpecModel(code: $code, name: $name)';
+    return 'CarModelEntity(code: $code, name: $name)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CarSpecModelImpl &&
+            other is _$CarModelEntityImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -158,31 +158,32 @@ class _$CarSpecModelImpl implements _CarSpecModel {
   @override
   int get hashCode => Object.hash(runtimeType, code, name);
 
-  /// Create a copy of CarSpecModel
+  /// Create a copy of CarModelEntity
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CarSpecModelImplCopyWith<_$CarSpecModelImpl> get copyWith =>
-      __$$CarSpecModelImplCopyWithImpl<_$CarSpecModelImpl>(this, _$identity);
+  _$$CarModelEntityImplCopyWith<_$CarModelEntityImpl> get copyWith =>
+      __$$CarModelEntityImplCopyWithImpl<_$CarModelEntityImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CarSpecModelImplToJson(
+    return _$$CarModelEntityImplToJson(
       this,
     );
   }
 }
 
-abstract class _CarSpecModel implements CarSpecModel {
-  const factory _CarSpecModel(
+abstract class _CarModelEntity implements CarModelEntity {
+  const factory _CarModelEntity(
       {@JsonKey(
           fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
       required final int code,
-      required final String name}) = _$CarSpecModelImpl;
+      required final String name}) = _$CarModelEntityImpl;
 
-  factory _CarSpecModel.fromJson(Map<String, dynamic> json) =
-      _$CarSpecModelImpl.fromJson;
+  factory _CarModelEntity.fromJson(Map<String, dynamic> json) =
+      _$CarModelEntityImpl.fromJson;
 
   @override
   @JsonKey(fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
@@ -190,10 +191,10 @@ abstract class _CarSpecModel implements CarSpecModel {
   @override
   String get name;
 
-  /// Create a copy of CarSpecModel
+  /// Create a copy of CarModelEntity
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CarSpecModelImplCopyWith<_$CarSpecModelImpl> get copyWith =>
+  _$$CarModelEntityImplCopyWith<_$CarModelEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

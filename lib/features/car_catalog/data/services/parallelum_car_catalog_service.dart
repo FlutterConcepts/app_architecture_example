@@ -13,14 +13,14 @@ class ParallelumCarCatalogService {
   final Client _client;
   final String baseUrl;
 
-  AsyncResult<List<CarBrandModel>> fetchCarBrands() async {
+  AsyncResult<List<CarBrandEntity>> fetchCarBrands() async {
     try {
       final response = await _client.get(Uri.parse('$baseUrl/cars/brands'));
 
       if (response.statusCode == 200) {
         final carBrands = (jsonDecode(response.body) as List<dynamic>)
             .cast<Map<String, dynamic>>()
-            .map(CarBrandModel.fromJson)
+            .map(CarBrandEntity.fromJson)
             .toList();
 
         return Success(carBrands);
@@ -36,7 +36,7 @@ class ParallelumCarCatalogService {
     }
   }
 
-  AsyncResult<List<CarSpecModel>> fetchCarModelsByBrand(
+  AsyncResult<List<CarModelEntity>> fetchCarModelsByBrand(
     int brandId,
   ) async {
     try {
@@ -46,7 +46,7 @@ class ParallelumCarCatalogService {
       if (response.statusCode == 200) {
         final carModels = (jsonDecode(response.body) as List<dynamic>)
             .cast<Map<String, dynamic>>()
-            .map(CarSpecModel.fromJson)
+            .map(CarModelEntity.fromJson)
             .toList();
 
         return Success(carModels);

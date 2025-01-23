@@ -7,7 +7,7 @@ class CarModelsByBrandSuccessView extends StatelessWidget {
     super.key,
   });
 
-  final List<CarSpecModel> carModels;
+  final List<CarModelEntity> carModels;
 
   @override
   Widget build(BuildContext context) {

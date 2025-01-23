@@ -1,17 +1,17 @@
 import 'package:app_architecture_example/app_architecture_example.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'car_spec_model.freezed.dart';
-part 'car_spec_model.g.dart';
+part 'car_brand_entity.freezed.dart';
+part 'car_brand_entity.g.dart';
 
 @freezed
-class CarSpecModel with _$CarSpecModel {
-  const factory CarSpecModel({
+class CarBrandEntity with _$CarBrandEntity {
+  const factory CarBrandEntity({
     @JsonKey(fromJson: ParseMapper.stringToInt, toJson: ParseMapper.intToString)
     required int code,
     required String name,
-  }) = _CarSpecModel;
+  }) = _CarBrandEntity;
 
-  factory CarSpecModel.fromJson(Map<String, dynamic> json) =>
-      _$CarSpecModelFromJson(json);
+  factory CarBrandEntity.fromJson(Map<String, dynamic> json) =>
+      _$CarBrandEntityFromJson(json);
 }

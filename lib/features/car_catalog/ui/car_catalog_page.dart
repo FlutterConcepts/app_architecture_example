@@ -28,10 +28,10 @@ class _CarCatalogPageState extends State<CarCatalogPage> {
       ),
       body: switch (interactor.value) {
         CarCatalogLoading() => const CarCatalogLoadingView(),
-        CarBrandsSuccess(carBrands: final List<CarBrandModel> carBrands) =>
+        CarBrandsSuccess(carBrands: final List<CarBrandEntity> carBrands) =>
           CarBrandsSuccessView(carBrands: carBrands),
         CarModelsByBrandSuccess(
-          carModels: final List<CarSpecModel> carModels
+          carModels: final List<CarModelEntity> carModels
         ) =>
           CarModelsByBrandSuccessView(carModels: carModels),
         CarCatalogFailure(message: final String message) =>

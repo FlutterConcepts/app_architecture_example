@@ -47,7 +47,7 @@ void main() {
       expect(result.isSuccess(), isTrue);
       result.onSuccess(
         (data) {
-          expect(data, isA<List<CarBrandModel>>());
+          expect(data, isA<List<CarBrandEntity>>());
           expect(data.length, 5);
         },
       ).onFailure(
@@ -102,7 +102,7 @@ void main() {
       // Assert
       expect(result.isSuccess(), isTrue);
       result.onSuccess((data) {
-        expect(data, isA<List<CarSpecModel>>());
+        expect(data, isA<List<CarModelEntity>>());
         expect(data.length, 5);
       }).onFailure(
         (_) => fail('Expected success but got failure'),

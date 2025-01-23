@@ -5,8 +5,8 @@ export 'features/car_catalog/data/repositories/remote_car_catalog_repository.dar
 export 'features/car_catalog/data/services/parallelum_car_catalog_service.dart';
 export 'features/car_catalog/interactor/car_catalog_interactor.dart';
 export 'features/car_catalog/interactor/car_catalog_view_states.dart';
-export 'features/car_catalog/interactor/models/car_brand_model.dart';
-export 'features/car_catalog/interactor/models/car_spec_model.dart';
+export 'features/car_catalog/interactor/entities/car_brand_entity.dart';
+export 'features/car_catalog/interactor/entities/car_model_entity.dart';
 export 'features/car_catalog/interactor/repositories/car_catalog_repository.dart';
 export 'features/car_catalog/ui/car_catalog_page.dart';
 export 'features/car_catalog/ui/car_catalog_provider.dart';

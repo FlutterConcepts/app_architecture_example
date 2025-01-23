@@ -26,7 +26,7 @@ void main() {
         () async {
       // Arrange
       final mockCarBrands = List.generate(5, (_) {
-        return CarBrandModel(
+        return CarBrandEntity(
           code: faker.randomGenerator.integer(1000, min: 1),
           name: faker.vehicle.model(),
         );
@@ -72,7 +72,7 @@ void main() {
       // Arrange
       const brandId = 1;
       final mockCarModels = List.generate(5, (_) {
-        return CarSpecModel(
+        return CarModelEntity(
           code: faker.randomGenerator.integer(1000, min: 1),
           name: faker.vehicle.model(),
         );
