@@ -13,7 +13,7 @@ class ParallelumCarCatalogRepository implements CarCatalogRepository {
   final String baseUrl;
 
   @override
-  Future<CarCatalogPageState> fetchCarBrands() async {
+  Future<CarCatalogViewState> fetchCarBrands() async {
     try {
       final response = await _client.get(Uri.parse('$baseUrl/cars/brands'));
 
@@ -37,7 +37,7 @@ class ParallelumCarCatalogRepository implements CarCatalogRepository {
   }
 
   @override
-  Future<CarCatalogPageState> fetchCarModelsByBrand(int brandId) async {
+  Future<CarCatalogViewState> fetchCarModelsByBrand(int brandId) async {
     try {
       final response =
           await _client.get(Uri.parse('$baseUrl/cars/brands/$brandId/models'));

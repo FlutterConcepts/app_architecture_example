@@ -9,8 +9,8 @@ void main() {
   late CarCatalogRepository mockRepository;
   late CarCatalogInteractor sut;
 
-  List<CarCatalogPageState> captureStates(CarCatalogInteractor interactor) {
-    final states = <CarCatalogPageState>[];
+  List<CarCatalogViewState> captureStates(CarCatalogInteractor interactor) {
+    final states = <CarCatalogViewState>[];
     interactor.addListener(() {
       states.add(interactor.value);
     });

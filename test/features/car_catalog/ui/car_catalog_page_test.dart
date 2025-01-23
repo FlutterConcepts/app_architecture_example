@@ -3,7 +3,7 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockCarCatalogInteractor extends ValueNotifier<CarCatalogPageState>
+class MockCarCatalogInteractor extends ValueNotifier<CarCatalogViewState>
     implements CarCatalogInteractor {
   MockCarCatalogInteractor() : super(CarCatalogLoading());
 
