@@ -6,7 +6,7 @@ class RemoteCarCatalogRepository implements CarCatalogRepository {
   final ParallelumCarCatalogService _service;
 
   @override
-  Future<CarCatalogViewState> fetchCarBrands() async {
+  Future<CarCatalogState> fetchCarBrands() async {
     final result = await _service.fetchCarBrands();
     return result.fold(
       CarBrandsSuccess.new,
@@ -17,7 +17,7 @@ class RemoteCarCatalogRepository implements CarCatalogRepository {
   }
 
   @override
-  Future<CarCatalogViewState> fetchCarModelsByBrand(int brandId) async {
+  Future<CarCatalogState> fetchCarModelsByBrand(int brandId) async {
     final result = await _service.fetchCarModelsByBrand(brandId);
     return result.fold(
       CarModelsByBrandSuccess.new,

@@ -23,7 +23,6 @@ class _CarCatalogPageState extends State<CarCatalogPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text(Constants.appName),
       ),
       body: switch (interactor.value) {
