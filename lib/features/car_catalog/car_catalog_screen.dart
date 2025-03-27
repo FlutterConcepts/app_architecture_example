@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 class CarCatalogScreen extends StatelessWidget {
   const CarCatalogScreen({super.key});
 
-  static const initialRoute = '/carCatalog';
+  static const route = '/car-catalog';
 
   @override
   Widget build(BuildContext context) {
